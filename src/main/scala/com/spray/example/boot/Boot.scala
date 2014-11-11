@@ -3,6 +3,7 @@ package com.spray.example.boot
 import akka.actor.{Props, ActorSystem}
 import akka.io.IO
 import com.spray.example.config.Configuration
+import com.spray.example.rest.RestServiceActor
 import spray.can.Http
 
 /**

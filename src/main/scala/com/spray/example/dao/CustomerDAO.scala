@@ -18,11 +18,11 @@ class CustomerDAO extends Configuration {
 
   val customers = TableQuery[CustomerTag]
 
-    db.withTransaction { implicit session =>
-      if (MTable.getTables("customers").list.isEmpty) {
-        customers.ddl.create
-      }
+  db.withTransaction { implicit session =>
+    if (MTable.getTables("customers").list.isEmpty) {
+      customers.ddl.create
     }
+  }
 
   def create(c: Customer): Either[Failure, Customer] = {
     try {
@@ -69,7 +69,7 @@ class CustomerDAO extends Configuration {
   def get(id: Long): Either[Failure, Customer] = {
     try {
       db.withSession { implicit session =>
-        customerTag.findById(id).firstOption match {
+        CustomerTag.findById(id).firstOption match {
           case Some(customer: Customer) => Right(customer)
           case None => Left(notFoundError(id))
         }
@@ -80,7 +80,7 @@ class CustomerDAO extends Configuration {
   }
 
   def search(params: CustomerSearchParameters): Either[Failure, List[Customer]] = {
-    implicit val typeMapper = customerTag.dateTypedMapper
+    implicit val typeMapper = CustomerTag.dateTypedMapper
 
     try {
       db.withSession { implicit session =>
@@ -91,7 +91,7 @@ class CustomerDAO extends Configuration {
             params.lastName.map(customer.lastName == _),
             params.birthday.map(customer.birthday == _)
           ).flatten match {
-            case Nil =>
+            case Nil => true
             case seq => seq.reduce(_ && _)
           }
         }

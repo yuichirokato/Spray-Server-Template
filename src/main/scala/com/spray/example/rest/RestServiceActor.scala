@@ -49,7 +49,7 @@ trait RestService extends HttpService {
       val sdf = new SimpleDateFormat("yyyy-MM-dd")
       try Right(sdf.parse(value))
       catch {
-        case e: ParseException => Left(MalformedContent("'%s' is not a valid Date value" format (value), e))
+        case e: ParseException => Left(MalformedContent(s"'$value' is not a valid Date value", e))
       }
     }
   }
@@ -60,6 +60,10 @@ trait RestService extends HttpService {
     } {
       RejectionHandler.Default(rejections)
     }
+  }
+
+  implicit val customUnmarshaller = Unmarshaller[Customer](MediaTypes.`application/json`) {
+    case httpEntity: HttpEntity => read[Customer](httpEntity.asString(HttpCharsets.`UTF-8`))
   }
 
   val rest = respondWithMediaType(MediaTypes.`application/json`) {

@@ -11,7 +11,7 @@ case class Customer(id: Option[Long],
                     lastName: String,
                     birthday: Option[java.util.Date])
 
-object customerTag extends TableQuery(new CustomerTag(_)) {
+object CustomerTag extends TableQuery(new CustomerTag(_)) {
   val findById = this.findBy(_.id)
 
   implicit val dateTypedMapper = MappedColumnType.base[java.util.Date, java.sql.Date](
@@ -21,12 +21,14 @@ object customerTag extends TableQuery(new CustomerTag(_)) {
 }
 
 class CustomerTag(tag: Tag) extends Table[Customer](tag, "customers"){
+  implicit val dateTypeMapper = CustomerTag.dateTypedMapper
+
   def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
   def firstName = column[String]("first_name")
   def lastName = column[String]("last_name")
-  def birthday = column[java.util.Date]("birthday", O.Nullable)
+  def birthday = column[java.util.Date]("birthday")
 
-  def * = (id, firstName, lastName, birthday) <> (Customer.tupled, Customer.unapply)
+  def * = (id.?, firstName, lastName, birthday.?) <> (Customer.tupled, Customer.unapply)
 }
 
 
