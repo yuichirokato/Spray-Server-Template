@@ -2,7 +2,7 @@ name := "SprayRestService"
 
 version := "1.0"
 
-scalaVersion := "2.11.2"
+scalaVersion := "2.11.1"
 
 libraryDependencies ++= {
   val akkaV = "2.3.6"
@@ -15,7 +15,7 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-testkit" % akkaV % "test",
     "org.specs2" %% "specs2-core" % "2.3.11" % "test",
     "mysql" % "mysql-connector-java" % "5.1.25",
-    "net.liftweb" % "lift-json_2.9.1" % "2.6-RC1",
+    "net.liftweb" % "lift-json_2.11" % "3.0-M2",
     "ch.qos.logback" % "logback-classic" % "1.0.13",
     "com.typesafe.akka" %% "akka-slf4j" % akkaV,
     "com.typesafe.slick" %% "slick" % "2.1.0-M2"
