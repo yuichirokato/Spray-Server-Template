@@ -3,9 +3,6 @@ package com.spray.example.config
 import com.typesafe.config.ConfigFactory
 import scala.util.Try
 
-/**
- * Created by you on 2014/11/09.
- */
 trait Configuration {
   // Application config object
   val config = ConfigFactory.load()

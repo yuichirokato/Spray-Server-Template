@@ -2,9 +2,6 @@ package com.spray.example.domain
 
 import spray.http.{StatusCodes, StatusCode}
 
-/**
- * Created by you on 2014/11/09.
- */
 case class Failure(message: String, errorType: FailureType.Value) {
 
   def getStatuCode: StatusCode = {

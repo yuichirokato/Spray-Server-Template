@@ -58,3 +58,5 @@ project/boot/
 .history
 .cache
 
+# LOG
+logs

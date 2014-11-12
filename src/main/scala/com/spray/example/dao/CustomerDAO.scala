@@ -1,9 +1,5 @@
 package com.spray.example.dao
 
-/**
- * Created by you on 2014/11/09.
- */
-
 import java.sql.SQLException
 
 import com.spray.example.config.Configuration

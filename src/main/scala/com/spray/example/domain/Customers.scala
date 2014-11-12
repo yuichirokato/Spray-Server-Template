@@ -1,8 +1,5 @@
 package com.spray.example.domain
 
-/**
- * Created by you on 2014/11/09.
- */
 import scala.slick.driver.MySQLDriver.simple._
 
 // dbのモデルクラス

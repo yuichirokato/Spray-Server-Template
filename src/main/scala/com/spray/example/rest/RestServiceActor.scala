@@ -14,10 +14,6 @@ import spray.httpx.unmarshalling._
 import spray.routing._
 import spray.util.LoggingContext
 
-/**
- * Created by you on 2014/11/09.
- */
-
 class RestServiceActor extends Actor with RestService {
   implicit def actorRefFactory = context
 
@@ -119,7 +115,7 @@ trait RestService extends HttpService {
   protected def handleRequest(ctx: RequestContext, successCode: StatusCode = StatusCodes.OK)(action: => Either[Failure, _]) = {
     action match {
       case Right(result: Object) => ctx.complete(successCode, write(result))
-      case Left(error: Failure) => ctx.complete(error.getStatuCode, net.liftweb.json.Serialization.write(Map("error" -> error.message)))
+      case Left(error: Failure) => ctx.complete(error.getStatuCode, write(Map("error" -> error.message)))
       case _ => ctx.complete(StatusCodes.InternalServerError)
     }
   }

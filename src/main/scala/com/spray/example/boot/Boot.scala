@@ -6,11 +6,8 @@ import com.spray.example.config.Configuration
 import com.spray.example.rest.RestServiceActor
 import spray.can.Http
 
-/**
- * Created by you on 2014/11/09.
- */
 object Boot extends App with Configuration {
-  implicit val system = ActorSystem("rest-service-example")
+  implicit val system = ActorSystem("spray-server-template")
 
   val restService = system.actorOf(Props[RestServiceActor], "rest-endpoint")
 
