@@ -24,7 +24,7 @@ trait RestService extends HttpService {
   val customerService = new CustomerDAO
   val logger = LoggingContext.fromActorRefFactory
 
-  implicit val executionContext = actorRefFactory.dispatcher
+  // implicit val executionContext = actorRefFactory.dispatcher
 
   implicit val liftJsonFormats = new Formats {
     val dateFormat = new DateFormat {
@@ -91,6 +91,7 @@ trait RestService extends HttpService {
             ctx: RequestContext =>
               handleRequest(ctx) {
                 logger.debug(s"Updating customer with id $customerId : $customer")
+                println(s"Updating customer with id $customerId : $customer")
                 customerService.update(customerId, customer)
               }
           }
@@ -99,6 +100,7 @@ trait RestService extends HttpService {
             ctx: RequestContext =>
               handleRequest(ctx) {
                 logger.debug(s"Deleting customer with id $customerId")
+                println(s"Deleting customer with id $customerId")
                 customerService.delete(customerId)
               }
           } ~
@@ -106,6 +108,7 @@ trait RestService extends HttpService {
             ctx: RequestContext =>
               handleRequest(ctx) {
                 logger.debug(s"Retrieving customer with id $customerId")
+                println(s"Retrieving customer with id $customerId")
                 customerService.get(customerId)
               }
           }
