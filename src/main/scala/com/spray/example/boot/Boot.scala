@@ -13,3 +13,5 @@ object Boot extends App with Configuration {
 
   IO(Http) ! Http.Bind(restService, serviceHost, servicePort)
 }
+
+
