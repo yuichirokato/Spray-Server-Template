@@ -4,7 +4,7 @@ import spray.http.{StatusCodes, StatusCode}
 
 case class Failure(message: String, errorType: FailureType.Value) {
 
-  def getStatuCode: StatusCode = {
+  def getStatusCode: StatusCode = {
     FailureType.withName(this.errorType.toString) match {
       case FailureType.BadRequest => StatusCodes.BadRequest
       case FailureType.NotFound => StatusCodes.NotFound

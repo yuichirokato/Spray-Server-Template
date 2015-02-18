@@ -83,9 +83,9 @@ class CustomerDAO extends Configuration {
         val query = for {
           customer <- customers if {
           Seq(
-            params.firstName.map(customer.firstName === _),
-            params.lastName.map(customer.lastName === _),
-            params.birthday.map(customer.birthday === _)
+            params.firstName.map(customer.firstName == _),
+            params.lastName.map(customer.lastName == _),
+            params.birthday.map(customer.birthday == _)
           ).flatten match {
             case Nil => true
             case seq => seq.reduce(_ && _)

@@ -118,7 +118,7 @@ trait RestService extends HttpService {
   protected def handleRequest(ctx: RequestContext, successCode: StatusCode = StatusCodes.OK)(action: => Either[Failure, _]) = {
     action match {
       case Right(result: Object) => ctx.complete(successCode, write(result))
-      case Left(error: Failure) => ctx.complete(error.getStatuCode, write(Map("error" -> error.message)))
+      case Left(error: Failure) => ctx.complete(error.getStatusCode, write(Map("error" -> error.message)))
       case _ => ctx.complete(StatusCodes.InternalServerError)
     }
   }

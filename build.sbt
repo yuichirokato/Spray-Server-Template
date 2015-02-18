@@ -1,3 +1,6 @@
+import com.typesafe.sbt.SbtNativePackager._
+import sbtassembly.Plugin.AssemblyKeys._
+
 name := "SprayRestService"
 
 version := "1.0"
@@ -12,6 +15,7 @@ libraryDependencies ++= {
     "io.spray" %% "spray-routing" % sprayV,
     "io.spray" %% "spray-testkit" % sprayV % "test",
     "com.typesafe.akka" %% "akka-actor" % akkaV,
+    "com.typesafe.akka" %% "akka-kernel" % akkaV,
     "com.typesafe.akka" %% "akka-testkit" % akkaV % "test",
     "org.specs2" %% "specs2-core" % "2.3.11" % "test",
     "mysql" % "mysql-connector-java" % "5.1.25",
@@ -26,3 +30,11 @@ resolvers ++= Seq(
   "Spray repository" at "http://repo.spray.io",
   "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
 )
+
+mainClass in Compile := Some("boot.Kernel")
+
+packageArchetype.akka_application
+
+assemblySettings
+
+jarName in assembly := "server_template.jar"
